@@ -1,0 +1,1120 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#d98b91">
+<meta name="description" content="Little Star Baby — kebutuhan bayi dan anak usia 0–5 tahun. Pakaian bayi, popok, botol susu, perlengkapan makan, tidur, mandi, mainan edukatif, stroller, dan baby carrier.">
+<title>Little Star Baby — Untuk Si Kecil Bintangmu</title>
+
+<link rel="icon" type="image/png" href="little-star-baby-logo.png">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;500;600;700;800&family=Poppins:wght@500;600;700;800;900&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
+<link rel="stylesheet" href="style-little-star-baby (1).css">
+</head>
+<body>
+
+<noscript>
+  <div style="padding:20px;text-align:center;background:#fff0f2;color:#484540;">
+    Little Star Baby — aktifkan JavaScript pada browser Anda untuk pengalaman belanja interaktif.
+  </div>
+</noscript>
+
+<!-- ============== SCROLL PROGRESS ============== -->
+<div class="scroll-progress-track">
+  <div class="scroll-progress-bar" id="scrollProgressBar"></div>
+</div>
+
+<!-- ============== INTRO / LOGIN SCREEN ============== -->
+<div class="intro-screen" id="introScreen">
+  <canvas id="introStars" class="intro-stars-canvas" aria-hidden="true"></canvas>
+  <div class="intro-decoration intro-decoration-one"></div>
+  <div class="intro-decoration intro-decoration-two"></div>
+  <div class="intro-decoration intro-decoration-three"></div>
+
+  <div class="intro-content auth-shell">
+    <img src="little-star-baby-logo.png" alt="Little Star Baby" class="intro-logo"
+         onerror="this.onerror=null;this.src='https://placehold.co/120x120/fff0f2/d98b91?text=LSB';">
+    <div class="intro-eyebrow">Selamat datang di</div>
+    <h1 class="intro-title">Little Star Baby</h1>
+    <p class="intro-tagline" id="introTagline">Masuk dulu yuk, supaya pesanan &amp; wishlist si kecil tersimpan aman.</p>
+
+    <!-- ---- tahap 1: boot singkat ---- -->
+    <div class="intro-loading-wrap" id="authBootWrap">
+      <div class="intro-loading-bar">
+        <div class="intro-loading-fill" id="introLoadingFill"></div>
+      </div>
+      <div class="intro-loading-meta">
+        <span id="introLoadingText">Menyiapkan halaman masuk...</span>
+        <span class="intro-percent" id="introPercent">0%</span>
+      </div>
+    </div>
+
+    <!-- ---- tahap 2: panel login ---- -->
+    <div class="auth-panel" id="authPanel" hidden>
+
+      <div class="auth-status" id="authStatusBadge">
+        <i class="bi bi-shield-lock"></i>
+        <span id="authStatusText">Login aman &amp; terenkripsi</span>
+      </div>
+
+      <!-- pilihan provider -->
+      <div class="auth-view" id="authViewProviders">
+        <button type="button" class="auth-btn auth-btn-google" id="authGoogle">
+          <span class="auth-btn-icon">
+            <svg viewBox="0 0 48 48" width="20" height="20" aria-hidden="true">
+              <path fill="#EA4335" d="M24 9.5c3.5 0 6.6 1.2 9 3.6l6.7-6.7C35.6 2.6 30.2.5 24 .5 14.6.5 6.5 5.9 2.6 13.7l7.8 6.1C12.3 13.8 17.6 9.5 24 9.5z"/>
+              <path fill="#4285F4" d="M46.98 24.55c0-1.6-.15-3.15-.43-4.65H24v9.02h12.94c-.56 2.9-2.2 5.36-4.66 7.02l7.5 5.8c4.38-4.05 6.9-10.02 6.9-17.19z"/>
+              <path fill="#FBBC05" d="M10.4 28.2a14.5 14.5 0 0 1 0-8.4l-7.8-6.1a23.9 23.9 0 0 0 0 20.6l7.8-6.1z"/>
+              <path fill="#34A853" d="M24 47.5c6.2 0 11.500-2.05 15.33-5.56l-7.5-5.8c-2.08 1.4-4.75 2.23-7.83 2.23-6.4 0-11.7-4.3-13.6-10.13l-7.8 6.1C6.5 42.1 14.6 47.5 24 47.5z"/>
+            </svg>
+          </span>
+          <span>Masuk dengan Google</span>
+        </button>
+
+        <button type="button" class="auth-btn auth-btn-facebook" id="authFacebook">
+          <span class="auth-btn-icon"><i class="bi bi-facebook"></i></span>
+          <span>Masuk dengan Facebook</span>
+        </button>
+
+        <button type="button" class="auth-btn auth-btn-whatsapp" id="authWhatsapp">
+          <span class="auth-btn-icon"><i class="bi bi-whatsapp"></i></span>
+          <span>Masuk dengan WhatsApp</span>
+        </button>
+
+        <div class="auth-divider"><span>atau</span></div>
+
+        <button type="button" class="auth-guest" id="authGuest">
+          Lanjut sebagai tamu <i class="bi bi-arrow-right-short"></i>
+        </button>
+
+        <p class="auth-terms">
+          Dengan masuk, Anda menyetujui <a href="#kontak">Syarat Layanan</a> &amp;
+          <a href="#kontak">Kebijakan Privasi</a> Little Star Baby.
+        </p>
+      </div>
+
+      <!-- nomor whatsapp -->
+      <div class="auth-view" id="authViewPhone" hidden>
+        <button type="button" class="auth-back" data-auth-back><i class="bi bi-arrow-left"></i> Kembali</button>
+        <h3 class="auth-view-title">Masuk dengan WhatsApp</h3>
+        <p class="auth-view-sub">Kami kirim kode verifikasi 6 digit ke nomor WhatsApp/SMS Anda.</p>
+
+        <div class="auth-phone-field">
+          <span class="auth-phone-prefix">+62</span>
+          <input type="tel" id="authPhoneInput" class="form-control" inputmode="numeric"
+                 placeholder="81234567890" autocomplete="tel-national">
+        </div>
+
+        <button type="button" class="btn btn-primary-custom w-100 mt-3" id="authSendOtp">
+          <i class="bi bi-send"></i> Kirim Kode OTP
+        </button>
+
+        <div id="authRecaptcha" class="auth-recaptcha"></div>
+      </div>
+
+      <!-- kode otp -->
+      <div class="auth-view" id="authViewOtp" hidden>
+        <button type="button" class="auth-back" data-auth-back><i class="bi bi-arrow-left"></i> Kembali</button>
+        <h3 class="auth-view-title">Masukkan Kode</h3>
+        <p class="auth-view-sub">Kode dikirim ke <strong id="authOtpTarget">+62</strong></p>
+
+        <div class="auth-otp-boxes" id="authOtpBoxes">
+          <input type="text" inputmode="numeric" maxlength="1" class="auth-otp-input">
+          <input type="text" inputmode="numeric" maxlength="1" class="auth-otp-input">
+          <input type="text" inputmode="numeric" maxlength="1" class="auth-otp-input">
+          <input type="text" inputmode="numeric" maxlength="1" class="auth-otp-input">
+          <input type="text" inputmode="numeric" maxlength="1" class="auth-otp-input">
+          <input type="text" inputmode="numeric" maxlength="1" class="auth-otp-input">
+        </div>
+
+        <button type="button" class="btn btn-primary-custom w-100 mt-3" id="authVerifyOtp">
+          <i class="bi bi-check2-circle"></i> Verifikasi &amp; Masuk
+        </button>
+
+        <button type="button" class="auth-resend" id="authResendOtp" disabled>
+          Kirim ulang kode (<span id="authResendTimer">30</span>s)
+        </button>
+      </div>
+
+      <div class="auth-error" id="authError" hidden></div>
+
+      <div class="d-flex justify-content-center mt-3">
+        <button type="button" class="intro-sound-toggle" id="introSoundToggle" aria-label="Suara sambutan">
+          <i class="bi bi-volume-up-fill"></i>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ============== ANNOUNCEMENT BAR ============== -->
+<div class="announcement-bar">
+  <div class="container announcement-content" id="announcementContent">
+    <i class="bi bi-truck"></i>
+    <span>Gratis ongkir min. belanja Rp300.000</span>
+    <span class="announcement-divider">•</span>
+    <i class="bi bi-shield-check"></i>
+    <span>Produk terpilih &amp; aman untuk si kecil</span>
+  </div>
+</div>
+
+<!-- ============== NAVBAR ============== -->
+<nav class="navbar navbar-expand-lg fixed-top">
+  <div class="container">
+    <a class="navbar-brand" href="#home">
+      <img src="little-star-baby-logo.png" alt="Little Star Baby" class="brand-icon" width="38" height="38">
+      <span class="lsb-brand-wordmark">Little Star Baby</span>
+    </a>
+
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav" aria-controls="mainNav" aria-expanded="false" aria-label="Buka navigasi">
+      <i class="bi bi-list"></i>
+    </button>
+
+    <div class="collapse navbar-collapse" id="mainNav">
+      <ul class="navbar-nav mx-auto">
+        <li class="nav-item"><a class="nav-link" href="#home">Home</a></li>
+
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="kategoriDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Kategori
+          </a>
+          <ul class="dropdown-menu" aria-labelledby="kategoriDropdown">
+            <li><a class="dropdown-item" href="#products" onclick="document.getElementById('categoryFilter').value='Pakaian Bayi'; applyFilters();">Pakaian Bayi</a></li>
+            <li><a class="dropdown-item" href="#products" onclick="document.getElementById('categoryFilter').value='Perlengkapan Makan'; applyFilters();">Perlengkapan Makan</a></li>
+            <li><a class="dropdown-item" href="#products" onclick="document.getElementById('categoryFilter').value='Tidur'; applyFilters();">Perlengkapan Tidur</a></li>
+            <li><a class="dropdown-item" href="#products" onclick="document.getElementById('categoryFilter').value='Mandi'; applyFilters();">Perlengkapan Mandi</a></li>
+            <li><a class="dropdown-item" href="#products" onclick="document.getElementById('categoryFilter').value='Mainan'; applyFilters();">Mainan</a></li>
+            <li><a class="dropdown-item" href="#products" onclick="document.getElementById('categoryFilter').value='Popok'; applyFilters();">Popok</a></li>
+            <li><a class="dropdown-item" href="#products" onclick="document.getElementById('categoryFilter').value='Stroller'; applyFilters();">Stroller</a></li>
+            <li><a class="dropdown-item" href="#products" onclick="document.getElementById('categoryFilter').value='Baby Carrier'; applyFilters();">Baby Carrier</a></li>
+            <li><a class="dropdown-item" href="#products" onclick="document.getElementById('categoryFilter').value='Aksesori'; applyFilters();">Aksesori</a></li>
+          </ul>
+        </li>
+
+        <li class="nav-item"><a class="nav-link" href="#products">Produk</a></li>
+        <li class="nav-item"><a class="nav-link" href="#promo">Promo</a></li>
+        <li class="nav-item"><a class="nav-link" href="#tentang">Tentang Kami</a></li>
+        <li class="nav-item"><a class="nav-link" href="#kontak">Kontak</a></li>
+      </ul>
+
+      <div class="navbar-actions d-flex align-items-center gap-2">
+        <button type="button" class="nav-action" id="searchButton" aria-label="Cari produk">
+          <i class="bi bi-search"></i>
+        </button>
+
+        <button type="button" class="nav-action" id="themeButton" aria-label="Mode gelap">
+          <i class="bi bi-moon-stars"></i>
+        </button>
+
+        <button type="button" class="nav-action" id="soundButton" aria-label="Suara sambutan">
+          <i class="bi bi-volume-up-fill"></i>
+        </button>
+
+        <button type="button" class="nav-action" id="wishlistButton" aria-label="Wishlist">
+          <i class="bi bi-heart"></i>
+          <span class="nav-count" id="wishlistCount">0</span>
+        </button>
+
+        <button type="button" class="nav-action" id="cartButton" aria-label="Keranjang belanja">
+          <i class="bi bi-bag"></i>
+          <span class="nav-count" id="cartCount">0</span>
+        </button>
+
+        <button type="button" class="nav-action" id="trackButton" aria-label="Lacak pesanan">
+          <i class="bi bi-box-seam"></i>
+        </button>
+
+        <div class="dropdown account-dropdown">
+          <button type="button" class="account-chip" id="accountButton" data-bs-toggle="dropdown" aria-expanded="false">
+            <img src="" alt="" class="account-avatar" id="accountAvatar" hidden>
+            <span class="account-avatar account-avatar-fallback" id="accountInitial">
+              <i class="bi bi-person"></i>
+            </span>
+            <span class="account-name" id="accountName">Tamu</span>
+          </button>
+          <ul class="dropdown-menu dropdown-menu-end account-menu" aria-labelledby="accountButton">
+            <li class="account-menu-head">
+              <strong id="accountMenuName">Tamu</strong>
+              <small id="accountMenuMeta">Belum masuk</small>
+            </li>
+            <li><hr class="dropdown-divider"></li>
+            <li><button type="button" class="dropdown-item" id="menuOrders"><i class="bi bi-box-seam"></i> Pesanan Saya</button></li>
+            <li><button type="button" class="dropdown-item" id="menuWishlist"><i class="bi bi-heart"></i> Wishlist Saya</button></li>
+            <li><button type="button" class="dropdown-item" id="menuLogin"><i class="bi bi-box-arrow-in-right"></i> Masuk / Daftar</button></li>
+            <li><button type="button" class="dropdown-item text-danger" id="menuLogout" hidden><i class="bi bi-box-arrow-right"></i> Keluar</button></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<!-- ============== HERO ============== -->
+<section class="hero-section" id="home">
+  <div class="hero-decoration hero-decoration-one"></div>
+  <div class="hero-decoration hero-decoration-two"></div>
+
+  <div class="container">
+    <div class="row align-items-center g-5">
+      <div class="col-lg-6 hero-content">
+        <span class="hero-label"><i class="bi bi-stars"></i> Untuk si kecil bintangmu</span>
+
+        <h1 class="hero-title">Kebutuhan Bayi &amp; Anak yang Lembut, Aman, dan Penuh Cinta</h1>
+
+        <p class="hero-description">
+          Little Star Baby menghadirkan pakaian, perlengkapan makan, tidur, mandi, mainan edukatif,
+          hingga stroller dan baby carrier — dipilih dengan teliti untuk tumbuh kembang si kecil.
+        </p>
+
+        <div class="hero-buttons">
+          <a href="#products" class="btn btn-primary-custom">
+            <i class="bi bi-bag-heart"></i>
+            Belanja Sekarang
+          </a>
+          <a href="#promo" class="btn btn-soft">
+            <i class="bi bi-gift"></i>
+            Lihat Promo
+          </a>
+        </div>
+
+        <div class="hero-features">
+          <div class="feature-item">
+            <span class="feature-icon"><i class="bi bi-truck"></i></span>
+            <span>Gratis Ongkir</span>
+          </div>
+          <div class="feature-item">
+            <span class="feature-icon"><i class="bi bi-patch-check"></i></span>
+            <span>Kualitas Terjamin</span>
+          </div>
+          <div class="feature-item">
+            <span class="feature-icon"><i class="bi bi-headset"></i></span>
+            <span>CS Responsif</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-lg-6 hero-visual">
+        <div class="hero-main-card">
+          <img src="images/hero-baby.jpg" alt="Little Star Baby" loading="lazy"
+               onerror="this.onerror=null;this.src='https://placehold.co/700x600/fff0f2/d98b91?text=Little+Star+Baby';">
+        </div>
+
+        <div class="floating-card floating-card-one">
+          <span class="floating-icon"><i class="bi bi-star-fill"></i></span>
+          <div>
+            <strong>4.9/5</strong>
+            <small>Rating pelanggan</small>
+          </div>
+        </div>
+
+        <div class="floating-card floating-card-two">
+          <span class="floating-icon"><i class="bi bi-people"></i></span>
+          <div>
+            <strong>2.500+</strong>
+            <small>Orang tua percaya</small>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============== CATEGORY SECTION ============== -->
+<section class="category-section" id="kategori">
+  <div class="container">
+    <div class="section-heading text-center">
+      <span class="eyebrow">Jelajahi Kategori</span>
+      <h2 class="section-title">Semua yang Dibutuhkan Si Kecil</h2>
+    </div>
+
+    <div class="row g-3">
+      <div class="col-6 col-md-4 col-lg-3">
+        <button type="button" class="category-card w-100" data-category="Pakaian Bayi"
+          onclick="document.getElementById('categoryFilter').value='Pakaian Bayi'; applyFilters(); document.querySelector('#products').scrollIntoView({behavior:'smooth'});">
+          <span class="category-icon"><i class="bi bi-stars"></i></span>
+          <strong>Pakaian Bayi</strong>
+          <small>Romper, dress, kaos</small>
+        </button>
+      </div>
+
+      <div class="col-6 col-md-4 col-lg-3">
+        <button type="button" class="category-card w-100" data-category="Perlengkapan Makan"
+          onclick="document.getElementById('categoryFilter').value='Perlengkapan Makan'; applyFilters(); document.querySelector('#products').scrollIntoView({behavior:'smooth'});">
+          <span class="category-icon"><i class="bi bi-cup-straw"></i></span>
+          <strong>Perlengkapan Makan</strong>
+          <small>Botol susu, piring, set makan</small>
+        </button>
+      </div>
+
+      <div class="col-6 col-md-4 col-lg-3">
+        <button type="button" class="category-card w-100" data-category="Tidur"
+          onclick="document.getElementById('categoryFilter').value='Tidur'; applyFilters(); document.querySelector('#products').scrollIntoView({behavior:'smooth'});">
+          <span class="category-icon"><i class="bi bi-moon-stars"></i></span>
+          <strong>Perlengkapan Tidur</strong>
+          <small>Selimut, sleep nest</small>
+        </button>
+      </div>
+
+      <div class="col-6 col-md-4 col-lg-3">
+        <button type="button" class="category-card w-100" data-category="Mandi"
+          onclick="document.getElementById('categoryFilter').value='Mandi'; applyFilters(); document.querySelector('#products').scrollIntoView({behavior:'smooth'});">
+          <span class="category-icon"><i class="bi bi-droplet"></i></span>
+          <strong>Perlengkapan Mandi</strong>
+          <small>Set mandi, handuk</small>
+        </button>
+      </div>
+
+      <div class="col-6 col-md-4 col-lg-3">
+        <button type="button" class="category-card w-100" data-category="Mainan"
+          onclick="document.getElementById('categoryFilter').value='Mainan'; applyFilters(); document.querySelector('#products').scrollIntoView({behavior:'smooth'});">
+          <span class="category-icon"><i class="bi bi-puzzle"></i></span>
+          <strong>Mainan</strong>
+          <small>Edukatif &amp; menyenangkan</small>
+        </button>
+      </div>
+
+      <div class="col-6 col-md-4 col-lg-3">
+        <button type="button" class="category-card w-100" data-category="Popok"
+          onclick="document.getElementById('categoryFilter').value='Popok'; applyFilters(); document.querySelector('#products').scrollIntoView({behavior:'smooth'});">
+          <span class="category-icon"><i class="bi bi-box-seam"></i></span>
+          <strong>Popok</strong>
+          <small>Nyaman sepanjang hari</small>
+        </button>
+      </div>
+
+      <div class="col-6 col-md-4 col-lg-3">
+        <button type="button" class="category-card w-100" data-category="Stroller"
+          onclick="document.getElementById('categoryFilter').value='Stroller'; applyFilters(); document.querySelector('#products').scrollIntoView({behavior:'smooth'});">
+          <span class="category-icon"><i class="bi bi-bicycle"></i></span>
+          <strong>Stroller</strong>
+          <small>Perjalanan nyaman</small>
+        </button>
+      </div>
+
+      <div class="col-6 col-md-4 col-lg-3">
+        <button type="button" class="category-card w-100" data-category="Baby Carrier"
+          onclick="document.getElementById('categoryFilter').value='Baby Carrier'; applyFilters(); document.querySelector('#products').scrollIntoView({behavior:'smooth'});">
+          <span class="category-icon"><i class="bi bi-person-hearts"></i></span>
+          <strong>Baby Carrier</strong>
+          <small>Gendongan praktis</small>
+        </button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============== PROMO SECTION ============== -->
+<section class="promo-section" id="promo">
+  <div class="container">
+    <div class="promo-card">
+      <div class="row align-items-center g-4">
+        <div class="col-lg-7">
+          <span class="promo-discount" id="promoDiscount">50%</span>
+          <h2 class="section-title mt-2" id="promoTitle">Special Promo</h2>
+          <p id="promoDescription">Diskon spesial untuk produk pilihan Little Star Baby.</p>
+
+          <div class="voucher-box">
+            <i class="bi bi-ticket-perforated"></i>
+            <span>Kode Voucher: <strong id="promoVoucher">STAR50</strong></span>
+            <button type="button" class="btn btn-soft btn-sm" id="copyVoucher">
+              <i class="bi bi-clipboard"></i> Salin
+            </button>
+          </div>
+        </div>
+
+        <div class="col-lg-5">
+          <div class="countdown-title text-lg-end text-center">
+            <i class="bi bi-hourglass-split"></i> Promo berakhir dalam
+          </div>
+          <div class="countdown text-lg-end justify-content-lg-end d-flex gap-2 justify-content-center" id="promoCountdown"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============== PRODUCT SECTION ============== -->
+<section class="product-section" id="products">
+  <div class="container">
+    <div class="section-heading text-center">
+      <span class="eyebrow">Katalog Produk</span>
+      <h2 class="section-title">Semua Kebutuhan Si Kecil</h2>
+    </div>
+
+    <div class="filter-panel">
+      <div class="row g-3">
+        <div class="col-md-4">
+          <label class="form-label small">Cari Produk</label>
+          <input type="text" id="searchInput" class="form-control" placeholder="Cari nama produk atau kategori...">
+        </div>
+
+        <div class="col-6 col-md-2">
+          <label class="form-label small">Kategori</label>
+          <select id="categoryFilter" class="form-select"></select>
+        </div>
+
+        <div class="col-6 col-md-2">
+          <label class="form-label small">Usia</label>
+          <select id="ageFilter" class="form-select">
+            <option value="all">Semua Usia</option>
+            <option value="0-1">0–1 Tahun</option>
+            <option value="1-3">1–3 Tahun</option>
+            <option value="3-5">3–5 Tahun</option>
+          </select>
+        </div>
+
+        <div class="col-6 col-md-2">
+          <label class="form-label small">Gender</label>
+          <select id="genderFilter" class="form-select">
+            <option value="all">Semua</option>
+            <option value="Unisex">Unisex</option>
+            <option value="Perempuan">Perempuan</option>
+            <option value="Laki-laki">Laki-laki</option>
+          </select>
+        </div>
+
+        <div class="col-6 col-md-2">
+          <label class="form-label small">Rating Min.</label>
+          <select id="ratingFilter" class="form-select">
+            <option value="all">Semua</option>
+            <option value="4.5">4.5 ke atas</option>
+            <option value="4">4.0 ke atas</option>
+            <option value="3.5">3.5 ke atas</option>
+          </select>
+        </div>
+
+        <div class="col-6 col-md-2">
+          <label class="form-label small">Harga Min.</label>
+          <input type="number" id="minPrice" class="form-control" placeholder="0">
+        </div>
+
+        <div class="col-6 col-md-2">
+          <label class="form-label small">Harga Maks.</label>
+          <input type="number" id="maxPrice" class="form-control" placeholder="1000000">
+        </div>
+
+        <div class="col-6 col-md-2">
+          <label class="form-label small">Urutkan</label>
+          <select id="sortFilter" class="form-select">
+            <option value="default">Rekomendasi</option>
+            <option value="price-low">Harga Termurah</option>
+            <option value="price-high">Harga Termahal</option>
+            <option value="rating">Rating Tertinggi</option>
+            <option value="popular">Paling Populer</option>
+            <option value="newest">Terbaru</option>
+          </select>
+        </div>
+
+        <div class="col-6 col-md-2 d-flex align-items-end">
+          <div class="form-check mb-2">
+            <input class="form-check-input" type="checkbox" id="stockFilter">
+            <label class="form-check-label small" for="stockFilter">Stok tersedia</label>
+          </div>
+        </div>
+
+        <div class="col-6 col-md-2 d-flex align-items-end">
+          <button type="button" id="resetFilter" class="btn btn-soft w-100">
+            <i class="bi bi-arrow-counterclockwise"></i> Reset
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <div class="product-result-info d-flex justify-content-between align-items-center mb-3">
+      <span><strong id="resultCount">0</strong> produk ditemukan</span>
+    </div>
+
+    <div class="row g-3" id="productGrid"></div>
+
+    <div class="empty-product d-none" id="emptyProduct">
+      <div class="empty-icon"><i class="bi bi-search"></i></div>
+      <h4>Produk tidak ditemukan</h4>
+      <p>Coba ubah kata kunci atau filter pencarian Anda.</p>
+      <button type="button" class="btn btn-primary-custom" id="emptyReset">Reset Filter</button>
+    </div>
+  </div>
+</section>
+
+<!-- ============== RECENTLY VIEWED ============== -->
+<section class="recent-section d-none" id="recentlyViewed">
+  <div class="container">
+    <div class="d-flex justify-content-between align-items-center section-heading">
+      <div>
+        <span class="eyebrow">Riwayat</span>
+        <h2 class="section-title mb-0">Baru Saja Dilihat</h2>
+      </div>
+      <button type="button" class="btn btn-soft btn-sm" id="clearRecentlyViewed">
+        <i class="bi bi-trash"></i> Hapus Riwayat
+      </button>
+    </div>
+
+    <div class="row g-3" id="recentlyViewedGrid"></div>
+  </div>
+</section>
+
+<!-- ============== REVIEW / TESTIMONI ============== -->
+<section class="review-section" id="testimoni">
+  <div class="container">
+    <div class="section-heading text-center">
+      <span class="eyebrow">Kata Mereka</span>
+      <h2 class="section-title">Dipercaya Orang Tua Indonesia</h2>
+    </div>
+
+    <div class="row g-4">
+      <div class="col-md-4">
+        <div class="review-card">
+          <div class="review-top">
+            <span class="review-avatar">RA</span>
+            <div>
+              <strong>Rani A.</strong>
+              <div class="review-stars"><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i></div>
+            </div>
+          </div>
+          <p>Bahan romper-nya lembut banget dan pengiriman cepat. Anak saya nyaman pakainya.</p>
+        </div>
+      </div>
+
+      <div class="col-md-4">
+        <div class="review-card">
+          <div class="review-top">
+            <span class="review-avatar">DP</span>
+            <div>
+              <strong>Dwi P.</strong>
+              <div class="review-stars"><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i></div>
+            </div>
+          </div>
+          <p>Botol susunya praktis, tidak bocor, dan harganya bersahabat. Sudah repeat order.</p>
+        </div>
+      </div>
+
+      <div class="col-md-4">
+        <div class="review-card">
+          <div class="review-top">
+            <span class="review-avatar">SN</span>
+            <div>
+              <strong>Sinta N.</strong>
+              <div class="review-stars"><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star"></i></div>
+            </div>
+          </div>
+          <p>Stroller-nya ringan dan mudah dilipat, sangat membantu untuk jalan-jalan bersama keluarga.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============== ABOUT ============== -->
+<section class="about-section" id="tentang">
+  <div class="container">
+    <div class="row align-items-center g-5">
+      <div class="col-lg-6 about-text">
+        <span class="eyebrow">Tentang Kami</span>
+        <h2 class="section-title">Little Star Baby, Sejak Awal Menemani Tumbuh Kembang Si Kecil</h2>
+        <p>
+          Little Star Baby hadir dari keinginan sederhana: menyediakan kebutuhan bayi dan anak
+          yang benar-benar nyaman, aman, dan terjangkau untuk keluarga Indonesia.
+        </p>
+        <p>
+          Setiap produk kami pilih dengan teliti — mulai dari bahan pakaian, material perlengkapan
+          makan, hingga keamanan mainan — agar orang tua bisa lebih tenang dan si kecil tetap
+          nyaman bereksplorasi.
+        </p>
+        <p class="about-foundation-note">
+          <i class="bi bi-heart-fill"></i>
+          Small Steps, Big Happiness.
+        </p>
+      </div>
+
+      <div class="col-lg-6 about-image">
+        <img src="images/about-baby.jpg" alt="Tentang Little Star Baby" loading="lazy"
+             onerror="this.onerror=null;this.src='https://placehold.co/700x600/edf4ed/7f9d83?text=Little+Star+Baby';">
+
+        <div class="about-badge">
+          <i class="bi bi-heart-fill"></i>
+          <div>
+            <strong>2.500+</strong>
+            <small>Keluarga puas berbelanja</small>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row g-3 mt-4">
+      <div class="col-6 col-md-3">
+        <div class="why-card">
+          <span class="why-icon"><i class="bi bi-patch-check"></i></span>
+          <strong>Kualitas Terjamin</strong>
+        </div>
+      </div>
+      <div class="col-6 col-md-3">
+        <div class="why-card">
+          <span class="why-icon"><i class="bi bi-truck"></i></span>
+          <strong>Pengiriman Cepat</strong>
+        </div>
+      </div>
+      <div class="col-6 col-md-3">
+        <div class="why-card">
+          <span class="why-icon"><i class="bi bi-cash-coin"></i></span>
+          <strong>Harga Bersahabat</strong>
+        </div>
+      </div>
+      <div class="col-6 col-md-3">
+        <div class="why-card">
+          <span class="why-icon"><i class="bi bi-headset"></i></span>
+          <strong>CS Ramah &amp; Cepat</strong>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============== NEWSLETTER ============== -->
+<section class="newsletter-section">
+  <div class="container">
+    <div class="newsletter-card text-center">
+      <h3>Dapatkan Info Promo Terbaru</h3>
+      <p>Berlangganan untuk mendapatkan info promo dan produk baru Little Star Baby.</p>
+
+      <form id="newsletterForm" class="d-flex flex-wrap justify-content-center gap-2">
+        <input type="email" id="newsletterEmail" class="newsletter-input" placeholder="Masukkan email Anda" required>
+        <button type="submit" class="btn btn-primary-custom">
+          <i class="bi bi-send"></i> Berlangganan
+        </button>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- ============== CONTACT ============== -->
+<section class="contact-section" id="kontak">
+  <div class="container">
+    <div class="section-heading text-center">
+      <span class="eyebrow">Hubungi Kami</span>
+      <h2 class="section-title">Kami Siap Membantu</h2>
+      <p class="section-subtitle">
+        Tim Little Star Baby siap menjawab pertanyaan seputar produk, pesanan, dan pengiriman.
+      </p>
+    </div>
+
+    <div class="row g-4 align-items-stretch contact-row">
+
+      <!-- kolom kiri: kartu kontak -->
+      <div class="col-lg-5">
+        <div class="contact-info-stack">
+
+          <a class="contact-card" href="https://wa.me/628138358354" target="_blank" rel="noopener">
+            <span class="contact-icon sage"><i class="bi bi-whatsapp"></i></span>
+            <div class="contact-card-body">
+              <h5>WhatsApp</h5>
+              <p class="contact-address-text">+62 813-8358-354</p>
+              <span class="contact-action">Chat sekarang <i class="bi bi-arrow-right-short"></i></span>
+            </div>
+          </a>
+
+          <div class="contact-card">
+            <span class="contact-icon blue"><i class="bi bi-clock"></i></span>
+            <div class="contact-card-body">
+              <h5>Jam Layanan</h5>
+              <p class="contact-address-text">Senin–Sabtu, 09.00–18.00 WIB</p>
+              <span class="contact-action contact-action-static">Minggu &amp; libur nasional tutup</span>
+            </div>
+          </div>
+
+          <a class="contact-card" href="mailto:hello@littlestarbaby.id">
+            <span class="contact-icon pink"><i class="bi bi-envelope"></i></span>
+            <div class="contact-card-body">
+              <h5>Email</h5>
+              <p class="contact-address-text">hello@littlestarbaby.id</p>
+              <span class="contact-action">Kirim email <i class="bi bi-arrow-right-short"></i></span>
+            </div>
+          </a>
+
+          <div class="contact-card">
+            <span class="contact-icon cream"><i class="bi bi-geo-alt"></i></span>
+            <div class="contact-card-body">
+              <h5>Lokasi</h5>
+              <p class="contact-address-text">Jakarta, Indonesia</p>
+              <span class="contact-action contact-action-static">Pengiriman ke seluruh Indonesia</span>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- kolom kanan: formulir -->
+      <div class="col-lg-7">
+        <div class="contact-form-wrapper h-100">
+          <h3>Kirim Pesan</h3>
+          <p class="contact-form-sub">Balasan rata-rata kurang dari 1 jam pada jam layanan.</p>
+
+          <form id="contactForm" class="contact-form">
+            <div class="row g-3">
+              <div class="col-md-6">
+                <label class="form-label small" for="contactName">Nama</label>
+                <input type="text" id="contactName" class="form-control" placeholder="Nama lengkap" required>
+              </div>
+              <div class="col-md-6">
+                <label class="form-label small" for="contactEmail">Email</label>
+                <input type="email" id="contactEmail" class="form-control" placeholder="nama@email.com" required>
+              </div>
+              <div class="col-md-6">
+                <label class="form-label small" for="contactPhone">Nomor WhatsApp</label>
+                <input type="tel" id="contactPhone" class="form-control" placeholder="08xxxxxxxxxx">
+              </div>
+              <div class="col-md-6">
+                <label class="form-label small" for="contactTopic">Topik</label>
+                <select id="contactTopic" class="form-select">
+                  <option>Pertanyaan produk</option>
+                  <option>Status pesanan &amp; resi</option>
+                  <option>Pembayaran</option>
+                  <option>Pengembalian / komplain</option>
+                  <option>Kerja sama</option>
+                </select>
+              </div>
+              <div class="col-12">
+                <label class="form-label small" for="contactMessage">Pesan</label>
+                <textarea id="contactMessage" class="form-control" rows="5" placeholder="Tulis pesan Anda..." required></textarea>
+              </div>
+              <div class="col-12 d-flex flex-wrap gap-2">
+                <button type="submit" class="btn btn-primary-custom">
+                  <i class="bi bi-send"></i> Kirim Pesan
+                </button>
+                <button type="button" class="btn btn-soft" onclick="openWhatsApp()">
+                  <i class="bi bi-whatsapp"></i> Chat WhatsApp
+                </button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ============== FOOTER ============== -->
+<footer>
+  <div class="container">
+    <div class="row g-4">
+      <div class="col-lg-4">
+        <a href="#home" class="footer-brand">
+          <img src="little-star-baby-logo.png" alt="Little Star Baby" width="34" height="34">
+          Little Star Baby
+        </a>
+        <p class="footer-description">
+          Kebutuhan bayi dan anak usia 0–5 tahun — nyaman, aman, dan penuh perhatian untuk tumbuh
+          kembang si kecil.
+        </p>
+        <div class="social-links">
+          <a href="#" aria-label="Instagram"><i class="bi bi-instagram"></i></a>
+          <a href="#" aria-label="Facebook"><i class="bi bi-facebook"></i></a>
+          <a href="#" aria-label="TikTok"><i class="bi bi-tiktok"></i></a>
+        </div>
+      </div>
+
+      <div class="col-6 col-lg-2">
+        <h6>Tautan</h6>
+        <ul class="footer-links">
+          <li><a href="#home">Home</a></li>
+          <li><a href="#products">Produk</a></li>
+          <li><a href="#promo">Promo</a></li>
+          <li><a href="#tentang">Tentang Kami</a></li>
+          <li><a href="#kontak">Kontak</a></li>
+        </ul>
+      </div>
+
+      <div class="col-6 col-lg-3">
+        <h6>Kategori</h6>
+        <ul class="footer-links">
+          <li><a href="#products" onclick="document.getElementById('categoryFilter').value='Pakaian Bayi'; applyFilters();">Pakaian Bayi</a></li>
+          <li><a href="#products" onclick="document.getElementById('categoryFilter').value='Perlengkapan Makan'; applyFilters();">Perlengkapan Makan</a></li>
+          <li><a href="#products" onclick="document.getElementById('categoryFilter').value='Mainan'; applyFilters();">Mainan</a></li>
+          <li><a href="#products" onclick="document.getElementById('categoryFilter').value='Popok'; applyFilters();">Popok</a></li>
+        </ul>
+      </div>
+
+      <div class="col-lg-3">
+        <h6>Kontak</h6>
+        <p class="footer-address">
+          <i class="bi bi-geo-alt"></i> Jakarta, Indonesia
+        </p>
+        <p class="footer-address">
+          <i class="bi bi-whatsapp"></i> +62 813-8358-354
+        </p>
+        <p class="footer-address">
+          <i class="bi bi-envelope"></i> hello@littlestarbaby.id
+        </p>
+      </div>
+    </div>
+
+    <div class="footer-bottom text-center">
+      <p>&copy; <span id="currentYear"></span> Little Star Baby. Small Steps, Big Happiness.</p>
+    </div>
+  </div>
+</footer>
+
+<!-- ============== CART OFFCANVAS ============== -->
+<div class="offcanvas offcanvas-end cart-offcanvas" tabindex="-1" id="cartCanvas" aria-labelledby="cartCanvasLabel">
+  <div class="offcanvas-header">
+    <h5 id="cartCanvasLabel"><i class="bi bi-bag"></i> Keranjang Belanja</h5>
+    <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Tutup"></button>
+  </div>
+  <div class="offcanvas-body d-flex flex-column">
+    <div id="cartItems" class="flex-grow-1"></div>
+
+    <div class="cart-summary">
+      <div class="voucher-cart d-flex gap-2 mb-3">
+        <input type="text" id="voucherInput" class="form-control" placeholder="Kode voucher">
+        <button type="button" class="btn btn-soft" onclick="applyVoucher()">Pakai</button>
+      </div>
+
+      <div class="d-flex justify-content-between">
+        <span>Subtotal</span>
+        <strong id="cartSubtotal">Rp0</strong>
+      </div>
+      <div class="d-flex justify-content-between">
+        <span>Diskon</span>
+        <strong id="cartDiscount">Rp0</strong>
+      </div>
+      <div class="d-flex justify-content-between">
+        <span>Ongkos Kirim</span>
+        <strong id="shippingCost">Rp0</strong>
+      </div>
+      <hr>
+      <div class="d-flex justify-content-between cart-footer">
+        <span>Total</span>
+        <strong id="cartTotal">Rp0</strong>
+      </div>
+
+      <button type="button" class="btn btn-primary-custom w-100 mt-3" id="checkoutButton">
+        <i class="bi bi-bag-check"></i> Checkout
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- ============== WISHLIST OFFCANVAS ============== -->
+<div class="offcanvas offcanvas-end" tabindex="-1" id="wishlistCanvas" aria-labelledby="wishlistCanvasLabel">
+  <div class="offcanvas-header">
+    <h5 id="wishlistCanvasLabel"><i class="bi bi-heart"></i> Wishlist</h5>
+    <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Tutup"></button>
+  </div>
+  <div class="offcanvas-body d-flex flex-column">
+    <div id="wishlistItems" class="flex-grow-1"></div>
+
+    <div id="wishlistFooter" class="d-none">
+      <button type="button" class="btn btn-primary-custom w-100" onclick="moveAllWishlistToCart()">
+        <i class="bi bi-cart-plus"></i> Pindahkan Semua ke Keranjang
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- ============== PRODUCT DETAIL MODAL ============== -->
+<div class="modal fade" id="productModal" tabindex="-1" aria-labelledby="productModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg modal-dialog-centered">
+    <div class="modal-content product-modal">
+      <button type="button" class="modal-close" data-bs-dismiss="modal" aria-label="Tutup">
+        <i class="bi bi-x-lg"></i>
+      </button>
+      <div class="modal-body" id="productDetail"></div>
+    </div>
+  </div>
+</div>
+
+<!-- ============== CHECKOUT MODAL (MULTI-LANGKAH) ============== -->
+<div class="modal fade checkout-modal" id="checkoutModal" tabindex="-1" aria-labelledby="checkoutModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
+    <div class="modal-content">
+
+      <div class="modal-header flex-column align-items-stretch">
+        <div class="d-flex align-items-center justify-content-between w-100">
+          <h5 class="modal-title" id="checkoutModalLabel"><i class="bi bi-bag-check"></i> Checkout</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Tutup"></button>
+        </div>
+
+        <ol class="checkout-steps" id="checkoutSteps">
+          <li class="is-active" data-step="1"><span>1</span> Pengiriman</li>
+          <li data-step="2"><span>2</span> Pembayaran</li>
+          <li data-step="3"><span>3</span> Bayar</li>
+          <li data-step="4"><span>4</span> Selesai</li>
+        </ol>
+      </div>
+
+      <div class="modal-body">
+
+        <!-- ===== STEP 1: DATA PENGIRIMAN ===== -->
+        <div class="checkout-step" data-step-panel="1">
+          <form id="checkoutForm" class="row g-3">
+            <div class="col-md-6">
+              <label class="form-label small" for="customerName">Nama Penerima</label>
+              <input type="text" id="customerName" class="form-control" placeholder="Nama lengkap" required>
+            </div>
+            <div class="col-md-6">
+              <label class="form-label small" for="customerPhone">Nomor WhatsApp</label>
+              <input type="tel" id="customerPhone" class="form-control" placeholder="08xxxxxxxxxx" required>
+            </div>
+            <div class="col-md-6">
+              <label class="form-label small" for="customerEmail">Email (untuk invoice)</label>
+              <input type="email" id="customerEmail" class="form-control" placeholder="nama@email.com">
+            </div>
+            <div class="col-md-6">
+              <label class="form-label small" for="customerCity">Kota / Kabupaten</label>
+              <input type="text" id="customerCity" class="form-control" placeholder="Kota/Kabupaten" required>
+            </div>
+            <div class="col-12">
+              <label class="form-label small" for="customerAddress">Alamat Lengkap</label>
+              <input type="text" id="customerAddress" class="form-control" placeholder="Jalan, nomor rumah, kode pos" required>
+            </div>
+            <div class="col-12">
+              <label class="form-label small" for="customerNote">Catatan (opsional)</label>
+              <textarea id="customerNote" class="form-control" rows="2" placeholder="Contoh: titip ke satpam"></textarea>
+            </div>
+
+            <div class="col-12">
+              <label class="form-label small d-block">Pilih Kurir</label>
+              <div class="courier-grid" id="courierGrid"></div>
+            </div>
+
+            <div class="col-12">
+              <button type="submit" class="btn btn-primary-custom w-100">
+                Lanjut ke Pembayaran <i class="bi bi-arrow-right"></i>
+              </button>
+            </div>
+          </form>
+        </div>
+
+        <!-- ===== STEP 2: METODE PEMBAYARAN ===== -->
+        <div class="checkout-step" data-step-panel="2" hidden>
+          <div class="payment-groups" id="paymentGroups"></div>
+
+          <div class="checkout-summary" id="checkoutSummary"></div>
+
+          <div class="d-flex gap-2 mt-3">
+            <button type="button" class="btn btn-soft flex-shrink-0" data-checkout-back="1">
+              <i class="bi bi-arrow-left"></i> Kembali
+            </button>
+            <button type="button" class="btn btn-primary-custom flex-grow-1" id="payNowButton" disabled>
+              <i class="bi bi-shield-lock"></i> Bayar Sekarang
+            </button>
+          </div>
+        </div>
+
+        <!-- ===== STEP 3: INSTRUKSI PEMBAYARAN ===== -->
+        <div class="checkout-step" data-step-panel="3" hidden>
+          <div class="pay-countdown">
+            <i class="bi bi-hourglass-split"></i>
+            Selesaikan pembayaran dalam <strong id="payTimer">15:00</strong>
+          </div>
+
+          <div id="payInstruction"></div>
+
+          <div class="d-flex gap-2 mt-3">
+            <button type="button" class="btn btn-soft flex-shrink-0" data-checkout-back="2">
+              <i class="bi bi-arrow-left"></i> Ganti Metode
+            </button>
+            <button type="button" class="btn btn-primary-custom flex-grow-1" id="confirmPayButton">
+              <i class="bi bi-check2-circle"></i> Saya Sudah Bayar
+            </button>
+          </div>
+        </div>
+
+        <!-- ===== STEP 4: SUKSES + RESI ===== -->
+        <div class="checkout-step" data-step-panel="4" hidden>
+          <div id="orderSuccess"></div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ============== LACAK PESANAN MODAL ============== -->
+<div class="modal fade track-modal" id="trackModal" tabindex="-1" aria-labelledby="trackModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="trackModalLabel"><i class="bi bi-box-seam"></i> Lacak Pesanan</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Tutup"></button>
+      </div>
+      <div class="modal-body">
+
+        <div class="track-search">
+          <input type="text" id="trackInput" class="form-control"
+                 placeholder="Masukkan nomor resi, contoh: LSB2609XXXXXX">
+          <button type="button" class="btn btn-primary-custom" id="trackSubmit">
+            <i class="bi bi-search"></i> Lacak
+          </button>
+        </div>
+
+        <div id="trackResult" class="track-result"></div>
+
+        <div class="track-orders">
+          <h6><i class="bi bi-clock-history"></i> Pesanan Terakhir</h6>
+          <div id="orderHistory"></div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ============== SEARCH OVERLAY ============== -->
+<div class="search-overlay" id="searchOverlay">
+  <div class="search-panel">
+    <div class="container">
+      <div class="search-header mb-3">
+        <h5 class="mb-0"><i class="bi bi-search"></i> Cari Produk</h5>
+        <button type="button" class="close-search" id="closeSearch" aria-label="Tutup pencarian">
+          <i class="bi bi-x-lg"></i>
+        </button>
+      </div>
+
+      <div class="search-input-wrapper">
+        <input type="text" id="searchOverlayInput" class="form-control form-control-lg"
+               placeholder="Ketik nama produk atau kategori..."
+               oninput="document.getElementById('searchInput').value=this.value; applyFilters();">
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ============== BACK TO TOP ============== -->
+<button type="button" class="nav-action position-fixed" id="backToTop" aria-label="Kembali ke atas"
+        style="right:22px; bottom:88px; z-index:900; background:#fff;">
+  <i class="bi bi-arrow-up"></i>
+</button>
+
+<!-- ============== WHATSAPP FLOAT ============== -->
+<button type="button" class="whatsapp-float" onclick="openWhatsApp()" aria-label="Chat WhatsApp">
+  <i class="bi bi-whatsapp"></i>
+  <span>Chat Kami</span>
+</button>
+
+<!-- ============== TOAST ============== -->
+<div class="toast-container position-fixed bottom-0 start-50 translate-middle-x p-3" style="z-index:2100;">
+  <div id="appToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+    <div class="toast-body d-flex align-items-center gap-2">
+      <i class="bi bi-check-circle-fill"></i>
+      <span id="toastMessage">Berhasil.</span>
+    </div>
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+<!-- QR code generator untuk QRIS -->
+<script src="https://cdn.jsdelivr.net/npm/qrcode@1.5.3/build/qrcode.min.js"></script>
+
+<!-- Firebase Authentication (Google, Facebook, WhatsApp/Phone OTP) -->
+<script type="module" src="firebase-little-star-baby.js"></script>
+
+<script src="script-little-star-baby (1).js"></script>
+</body>
+</html>
